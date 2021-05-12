@@ -25,7 +25,7 @@ public class ClientBase {
      */
     @NotNull
     public static final String CLIENT_NAME = "Outrage";
-    public static final double CLIENT_VERSION_NUMBER = 2.0;
+    public static final double CLIENT_VERSION_NUMBER = 1.0;
     @NotNull
     public static final String CLIENT_VERSION = CLIENT_VERSION_NUMBER + "-DEV";
     @NotNull
