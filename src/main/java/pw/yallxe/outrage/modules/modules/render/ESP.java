@@ -27,10 +27,10 @@ public class ESP extends Module {
     private @NotNull final NumberValue<Integer> colorR = new NumberValue<>("Red", 0, 0, 255);
     private @NotNull final NumberValue<Integer> colorG = new NumberValue<>("Green", 0, 0, 255);
     private @NotNull final NumberValue<Integer> colorB = new NumberValue<>("Blue", 0, 0, 255);
-    private final BooleanValue playersBool = new BooleanValue("Players", true);
-    private final BooleanValue mobsBool = new BooleanValue("Mobs", true);
+    private @NotNull final BooleanValue playersBool = new BooleanValue("Players", true);
+    private @NotNull final BooleanValue mobsBool = new BooleanValue("Mobs", true);
 
-    private boolean doRenderBoolean(Entity e) {
+    private boolean doRenderBoolean(@NotNull Entity e) {
         if (e instanceof EntityPlayer && playersBool.getObject()) {
             return true;
         } else return !(e instanceof EntityPlayer) && mobsBool.getObject();

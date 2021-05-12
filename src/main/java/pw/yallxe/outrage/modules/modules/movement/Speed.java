@@ -1,6 +1,7 @@
 package pw.yallxe.outrage.modules.modules.movement;
 
 import com.darkmagician6.eventapi.EventTarget;
+import org.jetbrains.annotations.NotNull;
 import pw.yallxe.outrage.events.MotionUpdateEvent;
 import pw.yallxe.outrage.events.SetbackEvent;
 import pw.yallxe.outrage.modules.Module;
@@ -10,18 +11,18 @@ import pw.yallxe.outrage.valuesystem.BooleanValue;
 import pw.yallxe.outrage.valuesystem.NumberValue;
 
 public class Speed extends Module {
-    private final BooleanValue setbackCheck = new BooleanValue("SetbackCheck", true);
-    private final BooleanValue ticksExistedBool = new BooleanValue("Boost on existed ticks", false);
-    private final NumberValue<Integer> ticksExistedInt = new NumberValue<>("Ticks existed", 2, 1, 20);
-    private final NumberValue<Float> speedOnExisted = new NumberValue<>("Speed on existed", 0.5f, 0.1f, 1f);
-    private final NumberValue<Float> defaultSpeed = new NumberValue<>("Speed", 0.5f, 0.1f, 1f);
+    private final @NotNull BooleanValue setbackCheck = new BooleanValue("SetbackCheck", true);
+    private final @NotNull BooleanValue ticksExistedBool = new BooleanValue("Boost on existed ticks", false);
+    private final @NotNull NumberValue<Integer> ticksExistedInt = new NumberValue<>("Ticks existed", 2, 1, 20);
+    private final @NotNull NumberValue<Float> speedOnExisted = new NumberValue<>("Speed on existed", 0.5f, 0.1f, 1f);
+    private final @NotNull NumberValue<Float> defaultSpeed = new NumberValue<>("Speed", 0.5f, 0.1f, 1f);
 
     public Speed() {
         super("Speed", "Go brrr", ModuleCategory.MOVEMENT);
     }
 
     @EventTarget
-    private void onMotionUpdate(MotionUpdateEvent event) {
+    private void onMotionUpdate(@NotNull MotionUpdateEvent event) {
         if (!getState()) return;
 
         if (MovementUtil.isMoving()  && !mc.player.capabilities.isFlying && !mc.player.isInWater() && !mc.player.isOnLadder()) {

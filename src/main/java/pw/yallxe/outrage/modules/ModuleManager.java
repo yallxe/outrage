@@ -56,7 +56,6 @@ public class ModuleManager {
         addModule(new ESP());
         addModule(new HoleESP());
         addModule(new OutlineESP());
-        addModule(new NoOverlay());
         addModule(new LongJump());
         addModule(new Sneak());
 

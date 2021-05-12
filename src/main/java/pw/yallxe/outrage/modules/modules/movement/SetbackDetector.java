@@ -15,6 +15,7 @@ import com.darkmagician6.eventapi.EventTarget;
 import com.darkmagician6.eventapi.types.EventType;
 import net.minecraft.network.play.server.SPacketPlayerPosLook;
 import net.minecraft.util.math.Vec3d;
+import org.jetbrains.annotations.NotNull;
 import pw.yallxe.outrage.events.MotionUpdateEvent;
 import pw.yallxe.outrage.events.PacketEvent;
 import pw.yallxe.outrage.events.SetbackEvent;
@@ -28,8 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SetbackDetector extends Module {
-    private final List<Vec3d> lastLocations = new ArrayList<>();
-    private final List<Long> lastSetBacks = new ArrayList<>();
+    private final @NotNull List<Vec3d> lastLocations = new ArrayList<>();
+    private final @NotNull List<Long> lastSetBacks = new ArrayList<>();
 
     public SetbackDetector() {
         super("FlagDetector", "Detects flags", ModuleCategory.MOVEMENT);

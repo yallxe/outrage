@@ -5,6 +5,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemEgg;
 import net.minecraft.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import pw.yallxe.outrage.events.Render3DEvent;
 import pw.yallxe.outrage.modules.Module;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -30,7 +31,7 @@ public class ProjectilesHelper extends Module {
     }
 
     @EventTarget
-    public void onRender3D(Render3DEvent event) {
+    public void onRender3D(@NotNull Render3DEvent event) {
         EntityPlayerSP player = mc.player;
 
         float yawAim = player.rotationYaw;

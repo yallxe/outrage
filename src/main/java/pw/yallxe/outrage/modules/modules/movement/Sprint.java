@@ -2,6 +2,7 @@ package pw.yallxe.outrage.modules.modules.movement;
 
 import com.darkmagician6.eventapi.EventTarget;
 import net.minecraft.client.settings.KeyBinding;
+import org.jetbrains.annotations.NotNull;
 import pw.yallxe.outrage.events.MotionUpdateEvent;
 import pw.yallxe.outrage.modules.Module;
 import pw.yallxe.outrage.modules.ModuleCategory;
@@ -9,7 +10,7 @@ import pw.yallxe.outrage.utils.MovementUtil;
 import pw.yallxe.outrage.valuesystem.BooleanValue;
 
 public class Sprint extends Module {
-    private final BooleanValue always = new BooleanValue("Always", false);
+    private final @NotNull BooleanValue always = new BooleanValue("Always", false);
 
     public Sprint() {
         super("Sprint", "Keep sprint", ModuleCategory.MOVEMENT);
@@ -22,7 +23,7 @@ public class Sprint extends Module {
     }
 
     @EventTarget
-    private void onMotionUpdate(MotionUpdateEvent event) {
+    private void onMotionUpdate(@NotNull MotionUpdateEvent event) {
         if (!getState()) return;
         if (always.getObject() && MovementUtil.isMoving() && !mc.player.collidedHorizontally) {
             mc.player.setSprinting(true);

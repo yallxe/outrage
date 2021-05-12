@@ -1,6 +1,7 @@
 package pw.yallxe.outrage.modules.modules.movement;
 
 import com.darkmagician6.eventapi.EventTarget;
+import org.jetbrains.annotations.NotNull;
 import pw.yallxe.outrage.events.MotionUpdateEvent;
 import pw.yallxe.outrage.modules.Module;
 import pw.yallxe.outrage.modules.ModuleCategory;
@@ -11,8 +12,8 @@ import org.lwjgl.input.Keyboard;
 
 public class ElytraFly extends Module {
 
-    private final ModeValue mode = new ModeValue("Mode", "Motion", "Motion");
-    private final NumberValue<Float> speed = new NumberValue<>("Speed", 0.1f, 0.5f, 10f);
+    private final @NotNull ModeValue mode = new ModeValue("Mode", "Motion", "Motion");
+    private final @NotNull NumberValue<Float> speed = new NumberValue<>("Speed", 0.1f, 0.1f, 10f);
 
     public ElytraFly() {
         super("ElytraFly", "Allows you to fly on Elytra, click RSHIFT to fly", ModuleCategory.MOVEMENT);

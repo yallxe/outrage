@@ -5,7 +5,7 @@ import pw.yallxe.outrage.modules.ModuleCategory;
 
 public class FullBright extends Module {
 
-    private float gamma = mc.gameSettings.gammaSetting;
+    private final float gamma = mc.gameSettings.gammaSetting;
 
     public FullBright() {
         super("FullBright", "See in complete darkness", ModuleCategory.RENDER);

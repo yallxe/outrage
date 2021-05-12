@@ -4,6 +4,7 @@ import com.darkmagician6.eventapi.EventTarget;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import org.jetbrains.annotations.NotNull;
 import pw.yallxe.outrage.events.Render3DEvent;
 import pw.yallxe.outrage.modules.Module;
 import pw.yallxe.outrage.modules.ModuleCategory;
@@ -18,17 +19,17 @@ public class OutlineESP extends Module {
         super("OutlineESP", "Glowing outline esp", ModuleCategory.RENDER);
     }
 
-    private final BooleanValue playersBool = new BooleanValue("Players", true);
-    private final BooleanValue mobsBool = new BooleanValue("Mobs", true);
+    private final @NotNull BooleanValue playersBool = new BooleanValue("Players", true);
+    private final @NotNull BooleanValue mobsBool = new BooleanValue("Mobs", true);
 
-    private boolean doRenderBoolean(Entity e) {
+    private boolean doRenderBoolean(@NotNull Entity e) {
         if (e instanceof EntityPlayer && playersBool.getObject()) {
             return true;
         } else return !(e instanceof EntityPlayer) && mobsBool.getObject();
     }
 
     @EventTarget
-    public void onRender(Render3DEvent event) {
+    public void onRender(@NotNull Render3DEvent event) {
         List<EntityLivingBase> targets = EntityUtils.getEntityLivingBases();
         targets = targets.stream().filter(entity -> entity != mc.player && !entity.isDead).collect(Collectors.toList());
 

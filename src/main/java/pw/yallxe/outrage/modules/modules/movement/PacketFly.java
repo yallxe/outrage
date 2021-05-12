@@ -5,6 +5,7 @@ import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.network.play.server.SPacketPlayerPosLook;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.math.MathHelper;
+import org.jetbrains.annotations.NotNull;
 import pw.yallxe.outrage.events.GameTickEvent;
 import pw.yallxe.outrage.events.PacketEvent;
 import pw.yallxe.outrage.modules.Module;
@@ -16,9 +17,9 @@ import pw.yallxe.outrage.valuesystem.ModeValue;
 import java.util.Objects;
 
 public class PacketFly extends Module {
-    private ModeValue mode = new ModeValue("Mode", "New", "New", "Old");
+    private @NotNull ModeValue mode = new ModeValue("Mode", "New", "New", "Old");
 
-    private final Timer timer = new Timer();
+    private final @NotNull Timer timer = new Timer();
 
     public PacketFly() {
         super("PacketFly", "Allows you to fly via packets", ModuleCategory.MOVEMENT);
@@ -38,7 +39,7 @@ public class PacketFly extends Module {
     }
     
     @EventTarget
-    private void onTick(GameTickEvent event) {
+    private void onTick(@NotNull GameTickEvent event) {
         if (mode.getModes()[mode.getObject()].equals("New")) {
             float forward = 0.0f;
             float strafe = 0.0f;

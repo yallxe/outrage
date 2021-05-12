@@ -17,6 +17,7 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
+import org.jetbrains.annotations.NotNull;
 import pw.yallxe.outrage.ClientBase;
 import pw.yallxe.outrage.events.Render2DEvent;
 import pw.yallxe.outrage.modules.Module;
@@ -37,9 +38,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class HUD extends Module {
-    private static final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
+    private static final @NotNull DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
 
-    private final GlyphPageFontRenderer renderer;
+    private final @NotNull GlyphPageFontRenderer renderer;
 
     public HUD() {
         super("HUD", "The Overlay", ModuleCategory.RENDER);
@@ -77,7 +78,7 @@ public class HUD extends Module {
     }
 
     @EventTarget
-    public void render2D(Render2DEvent event) {
+    public void render2D(@NotNull Render2DEvent event) {
         if (!getState()) return;
         FontRenderer fontRenderer = mc.fontRenderer;
 
