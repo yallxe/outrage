@@ -7,6 +7,6 @@ best skid client<br>
 - Run genIntellijRuns
 - Open runClient configuration, and add `-Dfml.coreMods.load=pw.yallxe.outrage.injection.MixinLoader` to VM Options
 ## TODO
-- clear shit
+- rewrite GL and Rendering utils, and fix bugs in these utils
 # Credits
 - ClientBase: superblaubeere27 https://github.com/superblaubeere27/clientbase
