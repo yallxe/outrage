@@ -8,6 +8,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.util.EnumHand;
+import org.jetbrains.annotations.NotNull;
 import pw.yallxe.outrage.events.GameTickEvent;
 import pw.yallxe.outrage.events.PacketEvent;
 import pw.yallxe.outrage.events.Render2DEvent;
@@ -32,24 +33,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class KillAura extends Module {
-    private final Timer timer;
+    private final @NotNull Timer timer;
 
-    private static EntityLivingBase target = null;
+    private static @NotNull EntityLivingBase target = null;
 
-    private final NumberValue<Integer> apsValue = new NumberValue<>("APS", 12, 1, 20);
-    private final NumberValue<Float> rangeValue = new NumberValue<>("Range", 6f, 0f, 8f);
-    private final NumberValue<Float> fovValue = new NumberValue<>("FOV", 180f, 1f, 360f);
-    private final ModeValue rotationMode = new ModeValue("Rotation", "Spoof", "Client", "Spoof");
-    private final ModeValue cooldownMode = new ModeValue("Cooldown", "Default", "Default", "APS");
-    private final BooleanValue targetESP = new BooleanValue("TargetESP", true);
-    private final BooleanValue targetHud = new BooleanValue("TargetHUD", true);
-    private final NumberValue<Integer> targetHudX = new NumberValue<>("TargetHUD X", 10, -250, 250);
-    private final NumberValue<Integer> targetHudY = new NumberValue<>("TargetHUD Y", 10, -250, 250);
+    private final @NotNull NumberValue<Integer> apsValue = new NumberValue<>("APS", 12, 1, 20);
+    private final @NotNull NumberValue<Float> rangeValue = new NumberValue<>("Range", 6f, 0f, 8f);
+    private final @NotNull NumberValue<Float> fovValue = new NumberValue<>("FOV", 180f, 1f, 360f);
+    private final @NotNull ModeValue rotationMode = new ModeValue("Rotation", "Spoof", "Client", "Spoof");
+    private final @NotNull ModeValue cooldownMode = new ModeValue("Cooldown", "Default", "Default", "APS");
+    private final @NotNull BooleanValue targetESP = new BooleanValue("TargetESP", true);
+    private final @NotNull BooleanValue targetHud = new BooleanValue("TargetHUD", true);
+    private final @NotNull NumberValue<Integer> targetHudX = new NumberValue<>("TargetHUD X", 10, -250, 250);
+    private final @NotNull NumberValue<Integer> targetHudY = new NumberValue<>("TargetHUD Y", 10, -250, 250);
 
-    private final GlyphPageFontRenderer renderer, rendererBold;
+    private final @NotNull GlyphPageFontRenderer renderer, rendererBold;
 
-    private final BooleanValue playersBool = new BooleanValue("Players", true);
-    private final BooleanValue mobsBool = new BooleanValue("Mobs", true);
+    private final @NotNull BooleanValue playersBool = new BooleanValue("Players", true);
+    private final @NotNull BooleanValue mobsBool = new BooleanValue("Mobs", true);
 
     private long last_player_packet = -1;
     private float iYaw = -1;
@@ -57,7 +58,7 @@ public class KillAura extends Module {
     private boolean setNormalAngle = false;
     float[] rotations;
 
-    private boolean doInteractBoolean(Entity e) {
+    private boolean doInteractBoolean(@NotNull Entity e) {
         if (RotationUtils.getRotationDifference(e) > fovValue.getObject()) return false;
         if (e instanceof EntityPlayer && playersBool.getObject()) {
             return true;
@@ -106,7 +107,7 @@ public class KillAura extends Module {
     }
 
     @EventTarget
-    private void tick(GameTickEvent event) {
+    private void tick(@NotNull GameTickEvent event) {
         if (!getState()) return;
 
         if (setNormalAngle) {
@@ -149,7 +150,7 @@ public class KillAura extends Module {
     }
 
     @EventTarget
-    private void render2d(Render2DEvent event) {
+    private void render2d(@NotNull Render2DEvent event) {
         if (target != null && targetHud.getObject()) {
             GL11.glPushMatrix();
             ScaledResolution sr = new ScaledResolution(mc);
@@ -170,7 +171,7 @@ public class KillAura extends Module {
         }
     }
 
-    private boolean handle_delta(PacketEvent event) {
+    private boolean handle_delta(@NotNull PacketEvent event) {
         long delta = System.currentTimeMillis() - last_player_packet;
         if (last_player_packet == -1) {
             last_player_packet = System.currentTimeMillis();
@@ -184,7 +185,7 @@ public class KillAura extends Module {
     }
 
     @EventTarget
-    private void render3d(Render3DEvent event) {
+    private void render3d(@NotNull Render3DEvent event) {
         if (target != null && targetESP.getObject()) {
             RendererUtils.drawRombESP(target, 255, 0, 0, 255, event.ticks);
         }
