@@ -1,5 +1,6 @@
 # Outrage
-best skid client
+best skid client<br>
+<img src="src/resources/preview.png" alt="Outrage"></img>
 ## Build / Contribute
 - Download intellij idea
 - Import gradle project
