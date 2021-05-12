@@ -1,9 +1,11 @@
 package net.superblaubeere27.clientbase.utils;
 
+import com.darkmagician6.eventapi.EventTarget;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.superblaubeere27.clientbase.events.GameTickEvent;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -13,7 +15,7 @@ public class CrystalUtils {
     private static final Minecraft mc = Minecraft.getMinecraft();
 
     private static final List<BlockPos> midSafety = new ArrayList<>();
-    private static List<BlockPos> holes = new ArrayList<>();
+    public static List<BlockPos> holes = new ArrayList<>();
     private static final BlockPos[] surroundOffset = BlockUtils.toBlockPos(EntityUtils.getOffsets(0, true));
 
     public static List<BlockPos> calcHoles(float range) {

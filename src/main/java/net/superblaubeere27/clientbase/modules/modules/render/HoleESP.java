@@ -31,14 +31,8 @@ public class HoleESP extends Module {
     private final NumberValue<Integer> rVal = new NumberValue<>("R", 0, 0, 255);
     private final NumberValue<Integer> gVal = new NumberValue<>("G", 0, 0, 255);
     private final NumberValue<Integer> bVal = new NumberValue<>("B", 0, 0, 255);
-    private final BooleanValue obsidianVal = new BooleanValue("Obsidian", true);
-    private final BooleanValue bedrockVal = new BooleanValue("Bedrock", true);
 
     private final GlyphPageFontRenderer renderer;
-
-    private static final List<BlockPos> midSafety = new ArrayList<>();
-    private static List<BlockPos> holes = new ArrayList<>();
-    private static final BlockPos[] surroundOffset = BlockUtils.toBlockPos(EntityUtils.getOffsets(0, true));
 
     public HoleESP() {
         super("HoleESP", "Shows safe spots.", ModuleCategory.RENDER);
@@ -59,7 +53,7 @@ public class HoleESP extends Module {
 
     @EventTarget
     public void onTick(GameTickEvent event) {
-        holes = CrystalUtils.calcHoles(range.getObject());
+        CrystalUtils.holes = CrystalUtils.calcHoles(range.getObject());
     }
 
     @EventTarget

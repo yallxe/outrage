@@ -41,9 +41,7 @@ public class ModuleManager {
     public void addModules() {
         addModule(new SetbackDetector());
         addModule(new FullBright());
-        addModule(new AntiBot());
         addModule(new AntiKnockback());
-        addModule(new InvMove());
         addModule(new NoRotate());
         addModule(new AutoTotem());
         addModule(new Sprint());
