@@ -1,3 +1,5 @@
+# VERY BAD CODE, CERTIFICATED BY NESCLASSDEV
+
 # Outrage
 best skid client<br>
 <img src="https://github.com/yallxe/outrage/blob/master/src/main/resources/preview.png?raw=true" alt="Outrage"></img>
