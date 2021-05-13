@@ -1,4 +1,0 @@
-language: java
-sudo: true # probably can be false 
-install: chmod +x gradlew
-script: ./gradlew clean build
