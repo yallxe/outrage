@@ -9,4 +9,5 @@ best skid client<br>
 ## TODO
 - rewrite GL and Rendering utils, and fix bugs in these utils
 # Credits
-- ClientBase: superblaubeere27 https://github.com/superblaubeere27/clientbase
+- ClientBase: superblaubeere27 (https://github.com/superblaubeere27/clientbase)
+- EventAPI: Darkmagican8 (https://bitbucket.org/DarkMagician6/eventapi)
