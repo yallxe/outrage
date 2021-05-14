@@ -45,6 +45,7 @@ public class KillAura extends Module {
     private final @NotNull NumberValue<Float> rangeValue = new NumberValue<>("Range", 6f, 0f, 8f);
     private final @NotNull NumberValue<Float> fovValue = new NumberValue<>("FOV", 180f, 1f, 360f);
     private final @NotNull ModeValue rotationMode = new ModeValue("Rotation", "Spoof", "Client", "Spoof");
+    private final @NotNull ModeValue rotateOn = new ModeValue("Rotate on", "Target", "Target", "Hit");
     private final @NotNull ModeValue cooldownMode = new ModeValue("Cooldown", "Default", "Default", "APS");
     private final @NotNull BooleanValue targetESP = new BooleanValue("TargetESP", true);
     private final @NotNull BooleanValue targetHud = new BooleanValue("TargetHUD", true);
@@ -61,6 +62,8 @@ public class KillAura extends Module {
     private float iPitch = -1;
     private boolean setNormalAngle = false;
     float @Nullable [] rotations;
+
+    boolean canHit;
 
     private boolean doInteractBoolean(@NotNull Entity e) {
         if (RotationUtils.getRotationDifference(e) > fovValue.getObject()) return false;
@@ -129,18 +132,37 @@ public class KillAura extends Module {
 
 
 
-        boolean canHit;
+
         if (cooldownMode.getModes()[cooldownMode.getObject()].equals("APS")) {
             canHit = timer.hasTimeElapsed(1000 / apsValue.getObject(), true);
         } else {
             canHit = (int)mc.player.getCooledAttackStrength(1) == 1;
         }
 
+        if (rotateOn.getModes()[rotateOn.getObject()].equals("Target")) {
+            handle_rotation();
+        }
+
         if (canHit) {
-            if (rotationMode.getModes()[rotationMode.getObject()].equals("Spoof")) {
-                final float[] rotations = RotationUtils.calcAngle(mc.player.getPositionEyes(mc.getRenderPartialTicks()), target.getPositionEyes(mc.getRenderPartialTicks()));
-                mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rotations[0], rotations[1], mc.player.onGround));
-            } else if (rotationMode.getModes()[rotationMode.getObject()].equals("Client")) {
+            if (rotateOn.getModes()[rotateOn.getObject()].equals("Hit")) {
+                handle_rotation();
+            }
+            mc.playerController.attackEntity(mc.player, target);
+            mc.player.swingArm(EnumHand.MAIN_HAND);
+        }
+    }
+
+    private void handle_rotation() {
+        if (rotationMode.getModes()[rotationMode.getObject()].equals("Spoof")) {
+            final float[] rotations = RotationUtils.calcAngle(mc.player.getPositionEyes(mc.getRenderPartialTicks()), target.getPositionEyes(mc.getRenderPartialTicks()));
+            mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rotations[0], rotations[1], mc.player.onGround));
+        }
+    }
+
+    @EventTarget
+    private void render2d(@NotNull Render2DEvent event) {
+        if (target != null) {
+            if (rotationMode.getModes()[rotationMode.getObject()].equals("Client")) {
                 rotations = RotationUtils.calcAngle(mc.player.getPositionEyes(mc.getRenderPartialTicks()), target.getPositionEyes(mc.getRenderPartialTicks()));
                 iYaw = mc.player.rotationYaw;
                 iPitch = mc.player.rotationPitch;
@@ -148,13 +170,8 @@ public class KillAura extends Module {
                 mc.player.rotationPitch = rotations[1];
                 setNormalAngle = true;
             }
-            mc.playerController.attackEntity(mc.player, target);
-            mc.player.swingArm(EnumHand.MAIN_HAND);
         }
-    }
 
-    @EventTarget
-    private void render2d(@NotNull Render2DEvent event) {
         if (target != null && targetHud.getObject()) {
             GL11.glPushMatrix();
             ScaledResolution sr = new ScaledResolution(mc);
