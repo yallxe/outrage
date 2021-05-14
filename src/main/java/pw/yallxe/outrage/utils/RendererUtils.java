@@ -291,16 +291,16 @@ public class RendererUtils {
     }
 
     public static void drawESPBase(@NotNull Color c) {
-        GLUtil.setColor(c, 0.3f);
+        GLUtil.setColor(c);
         drawSolidBox();
-        GLUtil.setColor(c, 0.7f);
+        GLUtil.setColor(c, c.getAlpha() + 0.4f);
         drawOutlinedBox();
     }
 
     public static void drawESPBase(@NotNull AxisAlignedBB bb, @NotNull Color c) {
-        GLUtil.setColor(c, 0.3f);
+        GLUtil.setColor(c);
         drawSolidBox(bb);
-        GLUtil.setColor(c, 0.7f);
+        GLUtil.setColor(c, c.getAlpha() + 0.4f);
         drawOutlinedBox(bb);
     }
 

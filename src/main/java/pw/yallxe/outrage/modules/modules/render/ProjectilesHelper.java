@@ -139,9 +139,9 @@ public class ProjectilesHelper extends Module {
         AxisAlignedBB bb = new AxisAlignedBB(renderX - 0.5, renderY - 0.5, renderZ - 0.5,
                                              renderX + 0.5, renderY + 0.5, renderZ + 0.5);
 
-        GL11.glColor4f(1, 1, 1, 0.15f);
-        RendererUtils.drawColorBox(bb, 1, 1, 1, 0.15f);
-        GL11.glColor4d(1, 1, 1, 0.5f);
+        GL11.glColor4f(1, 1, 1, 0.3f);
+        RendererUtils.drawColorBox(bb, 1, 1, 1, 0.3f);
+        GL11.glColor4f(1, 1, 1, 0.7f);
         RendererUtils.drawSelectionBoundingBox(bb);
 
         GL11.glDisable(3042);

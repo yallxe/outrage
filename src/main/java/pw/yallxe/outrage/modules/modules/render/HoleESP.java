@@ -80,7 +80,7 @@ public class HoleESP extends Module {
             }
 
             if(CrystalUtils.isSafe(pos)) {
-                RendererUtils.drawBlockESP(pos, new Color(rVal.getObject(), gVal.getObject(), bVal.getObject()));
+                RendererUtils.drawBlockESP(pos, new Color(rVal.getObject(), gVal.getObject(), bVal.getObject(), 30));
                 drawnHoles++;
             }
         }

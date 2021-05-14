@@ -51,7 +51,7 @@ public class ESP extends Module {
                 continue;
             }
             if (espmode.getModes()[espmode.getObject()].equals("Box")) {
-                RendererUtils.drawEntityESP(entity, new Color(colorR.getObject(), colorG.getObject(), colorB.getObject()));
+                RendererUtils.drawEntityESP(entity, new Color(colorR.getObject(), colorG.getObject(), colorB.getObject(), 30));
             }
         }
     }
