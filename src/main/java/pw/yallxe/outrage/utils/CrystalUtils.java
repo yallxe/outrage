@@ -1,20 +1,25 @@
+/*
+ * Copyright (c) 2021 yallxe
+ */
+
 package pw.yallxe.outrage.utils;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 public class CrystalUtils {
-    private static final Minecraft mc = Minecraft.getMinecraft();
+    private static final @NotNull Minecraft mc = Minecraft.getMinecraft();
 
-    private static final List<BlockPos> midSafety = new ArrayList<>();
-    public static List<BlockPos> holes = new ArrayList<>();
-    private static final BlockPos[] surroundOffset = BlockUtils.toBlockPos(EntityUtils.getOffsets(0, true));
+    private static final @NotNull List<BlockPos> midSafety = new ArrayList<>();
+    public static @NotNull List<BlockPos> holes = new ArrayList<>();
+    private static final BlockPos @NotNull [] surroundOffset = BlockUtils.toBlockPos(EntityUtils.getOffsets(0, true));
 
     public static List<BlockPos> calcHoles(float range) {
         List<BlockPos> safeSpots = new ArrayList<>();
@@ -57,7 +62,7 @@ public class CrystalUtils {
         return safeSpots;
     }
 
-    public static boolean isSafe(BlockPos pos) {
+    public static boolean isSafe(@NotNull BlockPos pos) {
         boolean isSafe = true;
         for(BlockPos offset : surroundOffset) {
             Block block = mc.world.getBlockState(pos.add(offset)).getBlock();
@@ -69,7 +74,7 @@ public class CrystalUtils {
         return isSafe;
     }
 
-    public static List<BlockPos> getSortedHoles() {
+    public static @NotNull List<BlockPos> getSortedHoles() {
         holes.sort(Comparator.comparingDouble(hole -> mc.player.getDistanceSq(hole)));
         return holes;
     }

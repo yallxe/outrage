@@ -10,6 +10,8 @@
 
 package pw.yallxe.outrage.gui.clickgui.components;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import pw.yallxe.outrage.gui.clickgui.AbstractComponent;
 import pw.yallxe.outrage.gui.clickgui.IRenderer;
 import pw.yallxe.outrage.gui.clickgui.Window;
@@ -22,15 +24,15 @@ public class ComboBox extends AbstractComponent {
     private final int preferredHeight;
     private boolean hovered;
     private boolean hoveredExtended;
-    private ValueChangeListener<Integer> listener;
-    private final String[] values;
+    private @Nullable ValueChangeListener<Integer> listener;
+    private final String @NotNull [] values;
     private int selectedIndex;
 
     private boolean opened;
     private int mouseX;
     private int mouseY;
 
-    public ComboBox(IRenderer renderer, int preferredWidth, int preferredHeight, String[] values, int selectedIndex) {
+    public ComboBox(@NotNull IRenderer renderer, int preferredWidth, int preferredHeight, String @NotNull [] values, int selectedIndex) {
         super(renderer);
 
         this.preferredWidth = preferredWidth;
@@ -43,7 +45,7 @@ public class ComboBox extends AbstractComponent {
         updateHeight();
     }
 
-    public ComboBox(IRenderer renderer, String[] values, int selectedIndex) {
+    public ComboBox(@NotNull IRenderer renderer, String @NotNull [] values, int selectedIndex) {
         this(renderer, PREFERRED_WIDTH, PREFERRED_HEIGHT, values, selectedIndex);
     }
 
@@ -84,18 +86,6 @@ public class ComboBox extends AbstractComponent {
         }
         // Draw triangle background
         renderer.drawRect(x + getWidth() - preferredHeight, y, preferredHeight, getHeight(), (hovered || opened) ? Window.TERTIARY_FOREGROUND.getRGB() : Window.SECONDARY_FOREGROUND_HEX);
-        // Draw triangle
-//        renderer.drawTriangle(
-//                x + getWidth() - getHeight() + getHeight() / 4.0, y + getHeight() / 4.0,
-//                x + getWidth() - getHeight() + getHeight() / 2.0, y + getHeight() / 4.0 + getHeight() / 2.0,
-//                x + getWidth() - getHeight() + getHeight() / 4.0, y + getHeight() / 4.0,
-//                Window.FOREGROUND);
-
-        renderer.drawTriangle(
-                x + getWidth() - preferredHeight + preferredHeight / 4.0, y + preferredHeight / 4.0,
-                x + getWidth() - preferredHeight + preferredHeight / 2.0, y + preferredHeight * 3.0 / 4.0,
-                x + getWidth() - preferredHeight + preferredHeight * 3.0 / 4.0, y + preferredHeight / 4.0,
-                Window.FOREGROUND);
 
         renderer.drawOutline(x, y, getWidth(), getHeight(), 1.0f, (hovered && !opened) ? Window.SECONDARY_OUTLINE.getRGB() : Window.SECONDARY_FOREGROUND_HEX);
 
@@ -176,15 +166,11 @@ public class ComboBox extends AbstractComponent {
         if (change) selectedIndex = i;
     }
 
-    public int getSelectedIndex() {
-        return selectedIndex;
-    }
-
     public void setSelectedIndex(int selectedIndex) {
         this.selectedIndex = selectedIndex;
     }
 
-    public void setListener(ValueChangeListener<Integer> listener) {
+    public void setListener(@NotNull ValueChangeListener<Integer> listener) {
         this.listener = listener;
     }
 

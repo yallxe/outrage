@@ -1,15 +1,15 @@
 /*
- * Copyright 2019 superblaubeere27
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * Copyright (c) 2018 superblaubeere27
+ */
+
+/*
+ * Copyright (c) 2021 yallxe
  */
 
 package pw.yallxe.outrage.gui.clickgui.components;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import pw.yallxe.outrage.gui.clickgui.AbstractComponent;
 import pw.yallxe.outrage.gui.clickgui.IRenderer;
 import pw.yallxe.outrage.gui.clickgui.layout.ILayoutManager;
@@ -18,12 +18,12 @@ import pw.yallxe.outrage.gui.clickgui.layout.Layout;
 import java.util.*;
 
 public class Pane extends AbstractComponent {
-    protected List<AbstractComponent> components = new ArrayList<>();
-    protected Map<AbstractComponent, int[]> componentLocations = new HashMap<>();
-    protected Layout layout;
-    private final ILayoutManager layoutManager;
+    protected @NotNull List<AbstractComponent> components = new ArrayList<>();
+    protected @NotNull Map<AbstractComponent, int[]> componentLocations = new HashMap<>();
+    protected @Nullable Layout layout;
+    private final @NotNull ILayoutManager layoutManager;
 
-    public Pane(IRenderer renderer, ILayoutManager layoutManager) {
+    public Pane(@NotNull IRenderer renderer, @NotNull ILayoutManager layoutManager) {
         super(renderer);
         this.layoutManager = layoutManager;
     }
@@ -86,11 +86,11 @@ public class Pane extends AbstractComponent {
         if (changeHeight) setHeight(layout.getMaxHeight());
     }
 
-    public List<AbstractComponent> getComponents() {
+    public @NotNull List<AbstractComponent> getComponents() {
         return components;
     }
 
-    public void addComponent(AbstractComponent component) {
+    public void addComponent(@NotNull AbstractComponent component) {
         components.add(component);
 
         updateLayout(super.getWidth(), super.getHeight(), true);
@@ -168,10 +168,10 @@ public class Pane extends AbstractComponent {
                 ((Pane) component).updateSize();
             }
         }
-        int[] optimalDiemension = layoutManager.getOptimalDiemension(components, Integer.MAX_VALUE);
+        int[] optimalDimension = layoutManager.getOptimalDimension(components, Integer.MAX_VALUE);
 
-        if (super.getWidth() <= 0) setWidth(optimalDiemension[0]);
-        if (super.getHeight() <= 0) setHeight(optimalDiemension[1]);
+        if (super.getWidth() <= 0) setWidth(optimalDimension[0]);
+        if (super.getHeight() <= 0) setHeight(optimalDimension[1]);
     }
 
     public void clearComponents() {

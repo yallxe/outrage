@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2021 yallxe
+ */
+
 package pw.yallxe.outrage.utils;
 
 import net.minecraft.client.Minecraft;
@@ -5,11 +9,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import org.jetbrains.annotations.NotNull;
 
 public class RotationUtils {
-    private static final Minecraft mc = Minecraft.getMinecraft();
+    private static final @NotNull Minecraft mc = Minecraft.getMinecraft();
 
-    public static float[] calcAngle(Vec3d from, Vec3d to) {
+    public static float @NotNull [] calcAngle(Vec3d from, Vec3d to) {
         final double difX = to.x - from.x;
         final double difY = (to.y - from.y) * -1.0F;
         final double difZ = to.z - from.z;
@@ -40,7 +45,7 @@ public class RotationUtils {
         return new Vec3d(bb.minX + (bb.maxX - bb.minX) * 0.5, bb.minY + (bb.maxX - bb.minY) * 0.5, bb.minZ + (bb.maxZ - bb.minZ) * 0.5);
     }
 
-    public static Rotation toRotation(final Vec3d vec, final boolean predict) {
+    public static Rotation toRotation(final @NotNull Vec3d vec, final boolean predict) {
         final Vec3d eyesPos = new Vec3d(mc.player.posX, mc.player.getEntityBoundingBox().minY +
                 mc.player.getEyeHeight(), mc.player.posZ);
 

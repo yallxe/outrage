@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2021 yallxe
+ */
+
 package pw.yallxe.outrage.utils;
 
 public class Timer {

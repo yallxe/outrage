@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2021 yallxe
+ */
 package pw.yallxe.outrage.modules.modules.combat;
 
 import com.darkmagician6.eventapi.EventTarget;
@@ -9,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.util.EnumHand;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import pw.yallxe.outrage.events.GameTickEvent;
 import pw.yallxe.outrage.events.PacketEvent;
 import pw.yallxe.outrage.events.Render2DEvent;
@@ -35,7 +39,7 @@ import java.util.stream.Collectors;
 public class KillAura extends Module {
     private final @NotNull Timer timer;
 
-    private static @NotNull EntityLivingBase target = null;
+    private static @Nullable EntityLivingBase target = null;
 
     private final @NotNull NumberValue<Integer> apsValue = new NumberValue<>("APS", 12, 1, 20);
     private final @NotNull NumberValue<Float> rangeValue = new NumberValue<>("Range", 6f, 0f, 8f);
@@ -56,7 +60,7 @@ public class KillAura extends Module {
     private float iYaw = -1;
     private float iPitch = -1;
     private boolean setNormalAngle = false;
-    float[] rotations;
+    float @Nullable [] rotations;
 
     private boolean doInteractBoolean(@NotNull Entity e) {
         if (RotationUtils.getRotationDifference(e) > fovValue.getObject()) return false;
@@ -187,7 +191,7 @@ public class KillAura extends Module {
     @EventTarget
     private void render3d(@NotNull Render3DEvent event) {
         if (target != null && targetESP.getObject()) {
-            RendererUtils.drawRombESP(target, 255, 0, 0, 255, event.ticks);
+            RendererUtils.drawEntityESP(target, new Color(255, 0, 0, 30));
         }
     }
 }

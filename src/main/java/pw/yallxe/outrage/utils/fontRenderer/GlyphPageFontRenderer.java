@@ -1,11 +1,9 @@
 /*
  * Copyright (c) 2018 superblaubeere27
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+/*
+ * Copyright (c) 2021 yallxe
  */
 
 package pw.yallxe.outrage.utils.fontRenderer;
@@ -14,6 +12,8 @@ import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.util.Locale;
@@ -22,7 +22,7 @@ import java.util.Random;
 import static org.lwjgl.opengl.GL11.*;
 
 public class GlyphPageFontRenderer {
-    public Random fontRandom = new Random();
+    public @NotNull Random fontRandom = new Random();
     /**
      * Current X coordinate at which to draw the next character.
      */
@@ -35,7 +35,7 @@ public class GlyphPageFontRenderer {
      * Array of RGB triplets defining the 16 standard chat colors followed by 16 darker version of the same colors for
      * drop shadows.
      */
-    private final int[] colorCode = new int[32];
+    private final int @NotNull [] colorCode = new int[32];
     /**
      * Used to specify new red value for the current color.
      */
@@ -78,9 +78,9 @@ public class GlyphPageFontRenderer {
      */
     private boolean strikethroughStyle;
 
-    private final GlyphPage regularGlyphPage, boldGlyphPage, italicGlyphPage, boldItalicGlyphPage;
+    private final @NotNull GlyphPage regularGlyphPage, boldGlyphPage, italicGlyphPage, boldItalicGlyphPage;
 
-    public GlyphPageFontRenderer(GlyphPage regularGlyphPage, GlyphPage boldGlyphPage, GlyphPage italicGlyphPage, GlyphPage boldItalicGlyphPage) {
+    public GlyphPageFontRenderer(@NotNull GlyphPage regularGlyphPage, @NotNull GlyphPage boldGlyphPage, @NotNull GlyphPage italicGlyphPage, @NotNull GlyphPage boldItalicGlyphPage) {
         this.regularGlyphPage = regularGlyphPage;
         this.boldGlyphPage = boldGlyphPage;
         this.italicGlyphPage = italicGlyphPage;
@@ -108,7 +108,7 @@ public class GlyphPageFontRenderer {
     }
 
 
-    public static GlyphPageFontRenderer create(String fontName, int size, boolean bold, boolean italic, boolean boldItalic) {
+    public static GlyphPageFontRenderer create(@NotNull String fontName, int size, boolean bold, boolean italic, boolean boldItalic) {
         char[] chars = new char[259];
 
         for (int i = 0; i < chars.length; i++) {
@@ -157,7 +157,7 @@ public class GlyphPageFontRenderer {
     /**
      * Draws the specified string.
      */
-    public int drawString(String text, float x, float y, int color, boolean dropShadow) {
+    public int drawString(@NotNull String text, float x, float y, int color, boolean dropShadow) {
         GlStateManager.enableAlpha();
         this.resetStyles();
         int i;
@@ -175,7 +175,7 @@ public class GlyphPageFontRenderer {
     /**
      * Render single line string by setting GL color, current (posX,posY), and calling renderStringAtPos()
      */
-    private int renderString(String text, float x, float y, int color, boolean dropShadow) {
+    private int renderString(@NotNull String text, float x, float y, int color, boolean dropShadow) {
         if (text == null) {
             return 0;
         } else {
@@ -280,7 +280,7 @@ public class GlyphPageFontRenderer {
         glPopMatrix();
     }
 
-    private void doDraw(float f, GlyphPage glyphPage) {
+    private void doDraw(float f, @NotNull GlyphPage glyphPage) {
         if (this.strikethroughStyle) {
             Tessellator tessellator = Tessellator.getInstance();
             BufferBuilder worldrenderer = tessellator.getBuffer();
@@ -312,7 +312,7 @@ public class GlyphPageFontRenderer {
     }
 
 
-    private GlyphPage getCurrentGlyphPage() {
+    private @NotNull GlyphPage getCurrentGlyphPage() {
         if (boldStyle && italicStyle)
             return boldItalicGlyphPage;
         else if (boldStyle)
@@ -338,7 +338,7 @@ public class GlyphPageFontRenderer {
         return regularGlyphPage.getMaxFontHeight() / 2;
     }
 
-    public int getStringWidth(String text) {
+    public int getStringWidth(@Nullable String text) {
         if (text == null) {
             return 0;
         }
@@ -387,14 +387,14 @@ public class GlyphPageFontRenderer {
     /**
      * Trims a string to fit a specified Width.
      */
-    public String trimStringToWidth(String text, int width) {
+    public @NotNull String trimStringToWidth(@NotNull String text, int width) {
         return this.trimStringToWidth(text, width, false);
     }
 
     /**
      * Trims a string to a specified width, and will reverse it if par3 is set.
      */
-    public String trimStringToWidth(String text, int maxWidth, boolean reverse) {
+    public @NotNull String trimStringToWidth(@NotNull String text, int maxWidth, boolean reverse) {
         StringBuilder stringbuilder = new StringBuilder();
 
         boolean on = false;

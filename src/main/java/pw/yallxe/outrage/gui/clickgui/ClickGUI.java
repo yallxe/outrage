@@ -3,8 +3,8 @@ package pw.yallxe.outrage.gui.clickgui;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
+import org.jetbrains.annotations.NotNull;
 import pw.yallxe.outrage.ClientBase;
-import pw.yallxe.outrage.gui.clickgui.components.*;
 import pw.yallxe.outrage.gui.clickgui.components.*;
 import pw.yallxe.outrage.gui.clickgui.components.Label;
 import pw.yallxe.outrage.gui.clickgui.layout.GridLayout;
@@ -27,16 +27,16 @@ import java.util.List;
 import java.util.Map;
 
 public class ClickGUI extends GuiScreen {
-    private final IRenderer renderer;
+    private final @NotNull IRenderer renderer;
 
-    private final HashMap<ModuleCategory, List<Module>> moduleCategoryMap = new HashMap<>();
-    private final HashMap<ModuleCategory, Window> categoryWindowMap = new HashMap<>();
+    private final @NotNull HashMap<ModuleCategory, List<Module>> moduleCategoryMap = new HashMap<>();
+    private final @NotNull HashMap<ModuleCategory, Window> categoryWindowMap = new HashMap<>();
 
     private boolean showKeyBinds;
 
     public ClickGUI() {
-        GlyphPageFontRenderer consolasRenderer = GlyphPageFontRenderer.create("BebasNeueRegular", 17, false, false, false);
-        renderer = new ClientBaseRendererImpl(consolasRenderer);
+        GlyphPageFontRenderer fontRenderer = GlyphPageFontRenderer.create("BebasNeueRegular", 17, false, false, false);
+        renderer = new ClientBaseRendererImpl(fontRenderer);
 
         for (Module module : ClientBase.INSTANCE.moduleManager.getModules()) {
             if (!moduleCategoryMap.containsKey(module.getCategory())) {

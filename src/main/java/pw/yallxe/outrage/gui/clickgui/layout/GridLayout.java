@@ -10,6 +10,7 @@
 
 package pw.yallxe.outrage.gui.clickgui.layout;
 
+import org.jetbrains.annotations.NotNull;
 import pw.yallxe.outrage.gui.clickgui.AbstractComponent;
 
 import java.util.HashMap;
@@ -35,7 +36,7 @@ public class GridLayout implements ILayoutManager {
 
 
     @Override
-    public int[] getOptimalDiemension(List<AbstractComponent> components, int maxWidth) {
+    public int @NotNull [] getOptimalDimension(@NotNull List<AbstractComponent> components, int maxWidth) {
         int rows = (int) Math.ceil(components.size() / (double) this.columns);
 
         AbstractComponent[][] comps = new AbstractComponent[rows][this.columns];
@@ -91,7 +92,7 @@ public class GridLayout implements ILayoutManager {
     }
 
     @Override
-    public Layout buildLayout(List<AbstractComponent> components, int width, int height) {
+    public @NotNull Layout buildLayout(@NotNull List<AbstractComponent> components, int width, int height) {
         int rows = (int) Math.ceil(components.size() / (double) this.columns);
 
         AbstractComponent[][] comps = new AbstractComponent[this.columns][rows];

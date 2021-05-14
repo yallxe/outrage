@@ -1,17 +1,17 @@
 /*
  * Copyright (c) 2018 superblaubeere27
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+/*
+ * Copyright (c) 2021 yallxe
  */
 
 package pw.yallxe.outrage.utils.fontRenderer;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.DynamicTexture;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.awt.font.FontRenderContext;
@@ -25,21 +25,21 @@ import static org.lwjgl.opengl.GL11.*;
 public class GlyphPage {
     private int imgSize;
     private int maxFontHeight = -1;
-    private final Font font;
+    private final @NotNull Font font;
     private final boolean antiAliasing;
     private final boolean fractionalMetrics;
-    private final HashMap<Character, Glyph> glyphCharacterMap = new HashMap<>();
+    private final @NotNull HashMap<Character, Glyph> glyphCharacterMap = new HashMap<>();
 
-    private BufferedImage bufferedImage;
-    private DynamicTexture loadedTexture;
+    private @Nullable BufferedImage bufferedImage;
+    private @Nullable DynamicTexture loadedTexture;
 
-    public GlyphPage(Font font, boolean antiAliasing, boolean fractionalMetrics) {
+    public GlyphPage(@NotNull Font font, boolean antiAliasing, boolean fractionalMetrics) {
         this.font = font;
         this.antiAliasing = antiAliasing;
         this.fractionalMetrics = fractionalMetrics;
     }
 
-    public void generateGlyphPage(char[] chars) {
+    public void generateGlyphPage(char @NotNull [] chars) {
         // Calculate glyphPageSize
         double maxWidth = -1;
         double maxHeight = -1;
@@ -121,10 +121,12 @@ public class GlyphPage {
     }
 
     public void setupTexture() {
+        assert bufferedImage != null;
         loadedTexture = new DynamicTexture(bufferedImage);
     }
 
     public void bindTexture() {
+        assert loadedTexture != null;
         GlStateManager.bindTexture(loadedTexture.getGlTextureId());
     }
 
@@ -178,14 +180,6 @@ public class GlyphPage {
 
     public int getMaxFontHeight() {
         return maxFontHeight;
-    }
-
-    public boolean isAntiAliasingEnabled() {
-        return antiAliasing;
-    }
-
-    public boolean isFractionalMetricsEnabled() {
-        return fractionalMetrics;
     }
 
     static class Glyph {

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2021 yallxe
+ */
+
 package pw.yallxe.outrage.modules.modules.movement;
 
 import com.darkmagician6.eventapi.EventTarget;

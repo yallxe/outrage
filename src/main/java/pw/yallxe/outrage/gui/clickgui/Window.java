@@ -1,16 +1,16 @@
 /*
- * Copyright 2019 superblaubeere27
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * Copyright (c) 2018 superblaubeere27
+ */
+
+/*
+ * Copyright (c) 2021 yallxe
  */
 
 package pw.yallxe.outrage.gui.clickgui;
 
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import pw.yallxe.outrage.gui.clickgui.components.Pane;
 
 import java.awt.*;
@@ -19,12 +19,12 @@ public class Window {
     /* Color constants */
 
     public static final int SECONDARY_FOREGROUND_HEX = 0xffffc34d;
-    public static final Color TERTIARY_FOREGROUND = new Color(20, 20, 20, 150);
-    public static final Color SECONDARY_OUTLINE = new Color(10, 10, 10, 255);
-    public static final Color BACKGROUND = new Color(40, 40, 40, 255);
-    public static final Color FOREGROUND = Color.white;
+    public static final @NotNull Color TERTIARY_FOREGROUND = new Color(20, 20, 20, 150);
+    public static final @NotNull Color SECONDARY_OUTLINE = new Color(10, 10, 10, 255);
+    public static final @NotNull Color BACKGROUND = new Color(40, 40, 40, 255);
+    public static final @NotNull Color FOREGROUND = Color.white;
 
-    private final String title;
+    private final @NotNull String title;
     private int x;
     private int y;
     private int width;
@@ -36,9 +36,9 @@ public class Window {
     private int dragX;
     private int dragY;
 
-    public Pane contentPane;
+    public @Nullable Pane contentPane;
 
-    public Window(String title, int x, int y, int width, int height) {
+    public Window(@NotNull String title, int x, int y, int width, int height) {
         this.title = title;
         this.x = x;
         this.y = y;
@@ -109,11 +109,7 @@ public class Window {
         drag(x, y);
     }
 
-    public Pane getContentPane() {
-        return contentPane;
-    }
-
-    public void setContentPane(Pane contentPane) {
+    public void setContentPane(@NotNull Pane contentPane) {
         this.contentPane = contentPane;
     }
 

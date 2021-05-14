@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2021 yallxe
+ */
+
 package pw.yallxe.outrage.modules.modules.render;
 
 import com.darkmagician6.eventapi.EventTarget;
@@ -23,7 +27,7 @@ public class ESP extends Module {
         super("ESP", "Highlights players", ModuleCategory.RENDER);
     }
 
-    private @NotNull final ModeValue espmode = new ModeValue("Mode", "GishCode", "GishCode", "Box");
+    private @NotNull final ModeValue espmode = new ModeValue("Mode", "Box", "Box");
     private @NotNull final NumberValue<Integer> colorR = new NumberValue<>("Red", 0, 0, 255);
     private @NotNull final NumberValue<Integer> colorG = new NumberValue<>("Green", 0, 0, 255);
     private @NotNull final NumberValue<Integer> colorB = new NumberValue<>("Blue", 0, 0, 255);
@@ -46,9 +50,7 @@ public class ESP extends Module {
             if (!doRenderBoolean(entity)) {
                 continue;
             }
-            if (espmode.getModes()[espmode.getObject()].equals("GishCode")) {
-                RendererUtils.drawRombESP(entity, colorR.getObject(), colorG.getObject(), colorB.getObject(), 60f, event.ticks);
-            } else if (espmode.getModes()[espmode.getObject()].equals("Box")) {
+            if (espmode.getModes()[espmode.getObject()].equals("Box")) {
                 RendererUtils.drawEntityESP(entity, new Color(colorR.getObject(), colorG.getObject(), colorB.getObject()));
             }
         }

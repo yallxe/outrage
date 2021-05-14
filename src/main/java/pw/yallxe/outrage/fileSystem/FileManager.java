@@ -1,11 +1,9 @@
 /*
  * Copyright (c) 2018 superblaubeere27
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+/*
+ * Copyright (c) 2021 yallxe
  */
 
 package pw.yallxe.outrage.fileSystem;
@@ -30,10 +28,9 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class FileManager {
-    private final File clientDir = new File(Minecraft.getMinecraft().mcDataDir, ClientBase.CLIENT_NAME);
-    private final File backupDir = new File(clientDir, "backups");
-    private final File scriptsDir = new File(clientDir, "scripts");
-    private final File saveFile = new File(clientDir, "client.json");
+    private final @NotNull File clientDir = new File(Minecraft.getMinecraft().mcDataDir, ClientBase.CLIENT_NAME);
+    private final @NotNull File backupDir = new File(clientDir, "backups");
+    private final @NotNull File saveFile = new File(clientDir, "client.json");
 
     public void save() throws Exception {
         //noinspection ResultOfMethodCallIgnored

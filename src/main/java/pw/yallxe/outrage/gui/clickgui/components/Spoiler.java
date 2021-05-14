@@ -1,15 +1,15 @@
 /*
- * Copyright 2019 superblaubeere27
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * Copyright (c) 2018 superblaubeere27
+ */
+
+/*
+ * Copyright (c) 2021 yallxe
  */
 
 package pw.yallxe.outrage.gui.clickgui.components;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import pw.yallxe.outrage.gui.clickgui.AbstractComponent;
 import pw.yallxe.outrage.gui.clickgui.IRenderer;
 import pw.yallxe.outrage.gui.clickgui.Window;
@@ -21,19 +21,18 @@ import java.awt.*;
 public class Spoiler extends AbstractComponent {
     private static final int PREFERRED_HEIGHT = 28;
     public int preferredWidth;
-    private String title;
+    private @Nullable String title;
     private final int preferredHeight;
     private boolean hovered;
-    private ActionEventListener listener;
-    private final Pane contentPane;
+    private final @NotNull Pane contentPane;
     private boolean opened = false;
 
     // XXX This kills off any use case of the spoiler except for modules
-    private final Module attachedModule;
+    private final @NotNull Module attachedModule;
     private boolean isBinding;
     public boolean showKeyBinds;
 
-    public Spoiler(IRenderer renderer, String title, int preferredWidth, int preferredHeight, Pane contentPane, Module attachedModule) {
+    public Spoiler(@NotNull IRenderer renderer, @NotNull String title, int preferredWidth, int preferredHeight, @NotNull Pane contentPane, @NotNull Module attachedModule) {
         super(renderer);
 
         this.preferredWidth = preferredWidth;
@@ -44,7 +43,7 @@ public class Spoiler extends AbstractComponent {
         setTitle(title);
     }
 
-    public Spoiler(IRenderer renderer, String title, int preferredWidth, Pane contentPane, Module attachedModule) {
+    public Spoiler(@NotNull IRenderer renderer, @NotNull String title, int preferredWidth, @NotNull Pane contentPane, @NotNull Module attachedModule) {
         this(renderer, title, preferredWidth, PREFERRED_HEIGHT, contentPane, attachedModule);
     }
 
@@ -127,11 +126,11 @@ public class Spoiler extends AbstractComponent {
         return opened && contentPane.mousePressed(button, x, y, offscreen);
     }
 
-    public String getTitle() {
+    public @Nullable String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(@NotNull String title) {
         this.title = title;
 
         updateBounds();
@@ -140,10 +139,6 @@ public class Spoiler extends AbstractComponent {
     private void updateBounds() {
         setWidth(preferredWidth);
         setHeight(Math.max(renderer.getStringHeight(getTitle()) * 5 / 4, preferredHeight) + (opened ? contentPane.getHeight() : 0));
-    }
-
-    public void setListener(ActionEventListener listener) {
-        this.listener = listener;
     }
 
     @Override

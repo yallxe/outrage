@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2021 yallxe
+ */
+
 package pw.yallxe.outrage.modules.modules.render;
 
 import com.darkmagician6.eventapi.EventTarget;
@@ -76,7 +80,7 @@ public class HoleESP extends Module {
             }
 
             if(CrystalUtils.isSafe(pos)) {
-                RendererUtils.drawBlockESP(pos, rVal.getObject(), gVal.getObject(), bVal.getObject());
+                RendererUtils.drawBlockESP(pos, new Color(rVal.getObject(), gVal.getObject(), bVal.getObject()));
                 drawnHoles++;
             }
         }

@@ -1,20 +1,24 @@
+/*
+ * Copyright (c) 2021 yallxe
+ */
+
 package pw.yallxe.outrage.utils;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class EntityUtils {
-    private static final Minecraft mc = Minecraft.getMinecraft();
+    private static final @NotNull Minecraft mc = Minecraft.getMinecraft();
 
-    public static List<EntityLivingBase> getEntityLivingBases() {
+    public static @NotNull List<EntityLivingBase> getEntityLivingBases() {
         return mc.world.loadedEntityList.stream()
                 .filter(EntityLivingBase.class::isInstance)
                 .map(EntityLivingBase.class::cast)
@@ -22,7 +26,7 @@ public class EntityUtils {
     }
 
 
-    public static Vec3d[] getOffsets(int y, boolean floor) {
+    public static Vec3d @NotNull [] getOffsets(int y, boolean floor) {
         List<Vec3d> offsets = getOffsetList(y, floor);
         Vec3d[] array = new Vec3d[offsets.size()];
         return offsets.toArray(array);

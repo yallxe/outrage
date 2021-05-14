@@ -11,13 +11,14 @@
 package pw.yallxe.outrage.gui.clickgui;
 
 import net.minecraft.client.Minecraft;
+import org.jetbrains.annotations.NotNull;
 import org.lwjgl.input.Mouse;
 
 import java.awt.*;
 
 public class Utils {
 
-    public static String formatTime(long l) {
+    public static @NotNull String formatTime(long l) {
         long minutes = l / 1000 / 60;
 
         l -= minutes * 1000 * 60;

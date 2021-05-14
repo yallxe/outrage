@@ -10,31 +10,23 @@
 
 package pw.yallxe.outrage.gui.clickgui;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.awt.*;
 
 public interface IRenderer {
 
-    void drawRect(double x, double y, double w, double h, Color c);
+    void drawRect(double x, double y, double w, double h, @NotNull Color c);
 
     void drawRect(double x, double y, double w, double h, int c);
 
-    void drawOutline(double x, double y, double w, double h, float lineWidth, Color c);
-
     void drawOutline(double x, double y, double w, double h, float lineWidth, int c);
 
-    void setColor(Color c);
+    void setColor(@NotNull Color c);
 
-    void drawString(int x, int y, String text, Color color);
+    void drawString(int x, int y, @NotNull String text, @NotNull Color color);
 
-    int getStringWidth(String str);
+    int getStringWidth(@NotNull String str);
 
-    int getStringHeight(String str);
-
-    void drawTriangle(double x1, double y1, double x2, double y2, double x3, double y3, Color color);
-
-    void initMask();
-
-    void useMask();
-
-    void disableMask();
+    int getStringHeight(@NotNull String str);
 }

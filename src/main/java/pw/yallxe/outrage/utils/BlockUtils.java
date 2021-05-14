@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2021 yallxe
+ */
+
 package pw.yallxe.outrage.utils;
 
 import net.minecraft.block.Block;
@@ -5,15 +9,16 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class BlockUtils {
-    private static final Minecraft mc = Minecraft.getMinecraft();
+    private static final @NotNull Minecraft mc = Minecraft.getMinecraft();
 
-    public static List<Block> unSolidBlocks = Arrays.asList(
+    public static @NotNull List<Block> unSolidBlocks = Arrays.asList(
             Blocks.FLOWING_LAVA,
             Blocks.FLOWER_POT,
             Blocks.SNOW,
@@ -69,20 +74,12 @@ public class BlockUtils {
             Blocks.TORCH
     );
 
-    public static boolean isBlockSolid(BlockPos pos){
-        return !isBlockUnSolid(pos);
-    }
-
-    public static boolean isBlockUnSolid(BlockPos pos){
-        return isBlockUnSolid(mc.world.getBlockState(pos).getBlock());
-    }
-
-    public static boolean isBlockUnSolid(Block block) {
+    public static boolean isBlockUnSolid(@NotNull Block block) {
         return unSolidBlocks.contains(block);
     }
 
-    public static List<BlockPos> getSphere(BlockPos pos, float r, int h, boolean hollow, boolean sphere, int plus_y) {
-        List<BlockPos> circleblocks = new ArrayList<>();
+    public static @NotNull List<BlockPos> getSphere(BlockPos pos, float r, int h, boolean hollow, boolean sphere, int plus_y) {
+        List<BlockPos> circleBlocks = new ArrayList<>();
         int cx = pos.getX();
         int cy = pos.getY();
         int cz = pos.getZ();
@@ -92,37 +89,19 @@ public class BlockUtils {
                     double dist = (cx - x) * (cx - x) + (cz - z) * (cz - z) + (sphere ? (cy - y) * (cy - y) : 0);
                     if (dist < r * r && !(hollow && dist < (r - 1) * (r - 1))) {
                         BlockPos l = new BlockPos(x, y + plus_y, z);
-                        circleblocks.add(l);
+                        circleBlocks.add(l);
                     }
                 }
             }
         }
-        return circleblocks;
+        return circleBlocks;
     }
 
-    public static BlockPos[] toBlockPos(Vec3d[] vec3ds) {
+    public static BlockPos @NotNull [] toBlockPos(Vec3d @NotNull [] vec3ds) {
         BlockPos[] list = new BlockPos[vec3ds.length];
         for(int i = 0; i < vec3ds.length; i++) {
             list[i] = new BlockPos(vec3ds[i]);
         }
         return list;
-    }
-
-    public static Boolean isPosInFov(BlockPos pos) {
-        int dirnumber = RotationUtils.getDirection4D();
-
-        if(dirnumber == 0 && pos.getZ() - mc.player.getPositionVector().z < 0) {
-            return false;
-        }
-
-        if(dirnumber == 1 && pos.getX() - mc.player.getPositionVector().x > 0) {
-            return false;
-        }
-
-        if(dirnumber == 2 && pos.getZ() - mc.player.getPositionVector().z > 0) {
-            return false;
-        }
-
-        return !(dirnumber == 3 && pos.getX() - mc.player.getPositionVector().x < 0);
     }
 }

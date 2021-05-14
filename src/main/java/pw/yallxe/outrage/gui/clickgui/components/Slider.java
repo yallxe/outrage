@@ -10,6 +10,8 @@
 
 package pw.yallxe.outrage.gui.clickgui.components;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import pw.yallxe.outrage.gui.clickgui.AbstractComponent;
 import pw.yallxe.outrage.gui.clickgui.IRenderer;
 import pw.yallxe.outrage.gui.clickgui.Utils;
@@ -28,13 +30,13 @@ public class Slider extends AbstractComponent {
     private final double minValue;
     private final double maxValue;
 
-    private final NumberType numberType;
+    private final @NotNull NumberType numberType;
 
-    private ValueChangeListener<Number> listener;
+    private @Nullable ValueChangeListener<Number> listener;
 
     private boolean changing = false;
 
-    public Slider(IRenderer renderer, double value, double minValue, double maxValue, NumberType numberType) {
+    public Slider(@NotNull IRenderer renderer, double value, double minValue, double maxValue, @NotNull NumberType numberType) {
         super(renderer);
         this.value = value;
         this.minValue = minValue;
@@ -132,7 +134,7 @@ public class Slider extends AbstractComponent {
         this.value = value;
     }
 
-    public void setListener(ValueChangeListener<Number> listener) {
+    public void setListener(@NotNull ValueChangeListener<Number> listener) {
         this.listener = listener;
     }
 
@@ -142,13 +144,13 @@ public class Slider extends AbstractComponent {
         DECIMAL(number -> String.format(Locale.ENGLISH, "%.2f", number.floatValue())),
         INTEGER(number -> Long.toString(number.longValue()));
 
-        private final Function<Number, String> formatter;
+        private final @Nullable Function<Number, String> formatter;
 
-        NumberType(Function<Number, String> formatter) {
+        NumberType(@NotNull Function<Number, String> formatter) {
             this.formatter = formatter;
         }
 
-        public Function<Number, String> getFormatter() {
+        public @Nullable Function<Number, String> getFormatter() {
             return formatter;
         }
     }

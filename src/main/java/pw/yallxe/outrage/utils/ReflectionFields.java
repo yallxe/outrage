@@ -41,86 +41,88 @@ import net.minecraft.util.Timer;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.FMLLog;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ReflectionFields {
     
-    public static Minecraft mc = Minecraft.getMinecraft();
+    public static @NotNull Minecraft mc = Minecraft.getMinecraft();
     
-    public static Field renderPosX;
-    public static Field renderPosY;
-    public static Field renderPosZ;
-    public static Field playerViewX;
-    public static Field playerViewY;
-    public static Field timer;
-    public static Field modelManager;
-    public static Field pressed;
+    public static @Nullable Field renderPosX;
+    public static @Nullable Field renderPosY;
+    public static @Nullable Field renderPosZ;
+    public static @Nullable Field playerViewX;
+    public static @Nullable Field playerViewY;
+    public static @Nullable Field timer;
+    public static @Nullable Field modelManager;
+    public static @Nullable Field pressed;
 
-    public static Field cpacketPlayerYaw;
-    public static Field cpacketPlayerPitch;
+    public static @Nullable Field cpacketPlayerYaw;
+    public static @Nullable Field cpacketPlayerPitch;
 
-    public static Field spacketPlayerPosLookYaw;
-    public static Field spacketPlayerPosLookPitch;
+    public static @Nullable Field spacketPlayerPosLookYaw;
+    public static @Nullable Field spacketPlayerPosLookPitch;
 
-    public static Field mapTextureObjects;
+    public static @Nullable Field mapTextureObjects;
 
-    public static Field cpacketPlayerOnGround;
+    public static @Nullable Field cpacketPlayerOnGround;
 
-    public static Field rightClickDelayTimer;
+    public static @Nullable Field rightClickDelayTimer;
 
-    public static Field horseJumpPower;
+    public static @Nullable Field horseJumpPower;
 
-    private static Field modifiersField;
-    public static Method rightClickMouse;
+    private static @Nullable Field modifiersField;
+    public static @NotNull Method rightClickMouse;
 
-    public static Field curBlockDamageMP;
-    public static Field blockHitDelay;
+    public static @Nullable Field curBlockDamageMP;
+    public static @Nullable Field blockHitDelay;
 
-    public static Field debugFps;
+    public static @Nullable Field debugFps;
 
-    public static Field lowerChestInventory;
-    public static Field shulkerInventory;
+    public static @Nullable Field lowerChestInventory;
+    public static @Nullable Field shulkerInventory;
 
-    public static Field spacketExplosionMotionX;
-    public static Field spacketExplosionMotionY;
-    public static Field spacketExplosionMotionZ;
+    public static @Nullable Field spacketExplosionMotionX;
+    public static @Nullable Field spacketExplosionMotionY;
+    public static @Nullable Field spacketExplosionMotionZ;
 
-    public static Field cpacketPlayerY;
-    public static Field cpacketVehicleMoveY;
-    public static Field session;
+    public static @Nullable Field cpacketPlayerY;
+    public static @Nullable Field cpacketVehicleMoveY;
+    public static @Nullable Field session;
 
 
-    public static Field PLAYER_MODEL_FLAG;
-    public static Field speedInAir;
+    public static @Nullable Field PLAYER_MODEL_FLAG;
+    public static @Nullable Field speedInAir;
 
-    public static Field guiButtonHovered;
+    public static @Nullable Field guiButtonHovered;
 
-    public static Field ridingEntity;
+    public static @Nullable Field ridingEntity;
 
-    public static Field foodExhaustionLevel;
+    public static @Nullable Field foodExhaustionLevel;
 
-    public static Field cPacketUpdateSignLines;
+    public static @Nullable Field cPacketUpdateSignLines;
 
-    public static Field hopperInventory;
+    public static @Nullable Field hopperInventory;
 
-    public static Field cPacketChatMessage;
+    public static @Nullable Field cPacketChatMessage;
 
-    public static Field guiSceenServerListServerData;
-    public static Field guiDisconnectedParentScreen;
-    public static Field sPacketChatChatComponent;
+    public static @Nullable Field guiSceenServerListServerData;
+    public static @Nullable Field guiDisconnectedParentScreen;
+    public static @Nullable Field sPacketChatChatComponent;
 
-    public static Field boundingBox;
+    public static @Nullable Field boundingBox;
 
-    public static Field y_vec3d;
+    public static @Nullable Field y_vec3d;
 
-    public static Field sleeping;
+    public static @Nullable Field sleeping;
 
-    public static Field sleepTimer;
+    public static @Nullable Field sleepTimer;
 
     static {
         try {
             modifiersField = Field.class.getDeclaredField("modifiers");
             modifiersField.setAccessible(true);
-        } catch (Exception e)   {
+        } catch (Exception ignored)   {
         }
     }
 
@@ -199,7 +201,7 @@ public class ReflectionFields {
         }
     }
 
-    public static Field getField(Class c, String... names)   {
+    public static @NotNull Field getField(@NotNull Class c, String... names)   {
         for (String s : names)  {
             try {
                 Field f = c.getDeclaredField(s);
@@ -216,7 +218,7 @@ public class ReflectionFields {
         throw new IllegalStateException("Field with names: " + names + " not found!");
     }
 
-    public static Method getMethod(Class c, String[] names, Class<?>... args) {
+    public static Method getMethod(@NotNull Class c, String @NotNull [] names, Class<?>... args) {
         for (String s : names) {
             try {
                 Method m = c.getDeclaredMethod(s, args);

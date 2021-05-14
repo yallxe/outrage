@@ -1,34 +1,33 @@
 /*
  * Copyright (c) 2018 superblaubeere27
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+/*
+ * Copyright (c) 2021 yallxe
  */
 
 package pw.yallxe.outrage.modules;
 
 import com.darkmagician6.eventapi.EventManager;
 import net.minecraft.client.Minecraft;
+import org.jetbrains.annotations.NotNull;
 import org.lwjgl.input.Keyboard;
 
 public abstract class Module {
-    protected static final Minecraft mc = Minecraft.getMinecraft();
-    private final String name;
-    private final String description;
-    private final ModuleCategory category;
+    protected static final @NotNull Minecraft mc = Minecraft.getMinecraft();
+    private final @NotNull String name;
+    private final @NotNull String description;
+    private final @NotNull ModuleCategory category;
     private final boolean canBeEnabled;
     private final boolean hidden;
     private int keybind;
     private boolean state;
 
-    protected Module(String name, String description, ModuleCategory moduleCategory) {
+    protected Module(@NotNull String name, @NotNull String description, @NotNull ModuleCategory moduleCategory) {
         this(name, description, moduleCategory, true, false, Keyboard.KEY_NONE);
     }
 
-    protected Module(String name, String description, ModuleCategory category, boolean canBeEnabled, boolean hidden, int keybind) {
+    protected Module(@NotNull String name, @NotNull String description, @NotNull ModuleCategory category, boolean canBeEnabled, boolean hidden, int keybind) {
         this.name = name;
         this.description = description;
         this.category = category;
@@ -37,15 +36,15 @@ public abstract class Module {
         this.keybind = keybind;
     }
 
-    public String getName() {
+    public @NotNull String getName() {
         return name;
     }
 
-    public String getDescription() {
+    public @NotNull String getDescription() {
         return description;
     }
 
-    public ModuleCategory getCategory() {
+    public @NotNull ModuleCategory getCategory() {
         return category;
     }
 

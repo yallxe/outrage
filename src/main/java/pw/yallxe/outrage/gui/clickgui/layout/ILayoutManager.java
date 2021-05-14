@@ -10,12 +10,13 @@
 
 package pw.yallxe.outrage.gui.clickgui.layout;
 
+import org.jetbrains.annotations.NotNull;
 import pw.yallxe.outrage.gui.clickgui.AbstractComponent;
 
 import java.util.List;
 
 public interface ILayoutManager {
-    int[] getOptimalDiemension(List<AbstractComponent> components, int maxWidth);
+    int @NotNull [] getOptimalDimension(@NotNull List<AbstractComponent> components, int maxWidth);
 
-    Layout buildLayout(List<AbstractComponent> components, int width, int height);
+    @NotNull Layout buildLayout(@NotNull List<AbstractComponent> components, int width, int height);
 }

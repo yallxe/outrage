@@ -1,4 +1,7 @@
-// so actually this shit is not skid (excepting safe places detection) but things kind of like resolvers of breaking n placing are custom and not skidded at all looool
+/*
+ * Copyright (c) 2021 yallxe
+ */
+
 package pw.yallxe.outrage.modules.modules.combat;
 
 import com.darkmagician6.eventapi.EventTarget;
@@ -25,6 +28,7 @@ import pw.yallxe.outrage.utils.RendererUtils;
 import pw.yallxe.outrage.valuesystem.BooleanValue;
 import pw.yallxe.outrage.valuesystem.NumberValue;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -133,7 +137,7 @@ public class CrystalAura extends Module {
     public void render(@NotNull Render3DEvent event) {
         for (Entity entity : mc.world.getLoadedEntityList()) {
             if (!(entity instanceof EntityEnderCrystal) || mc.player.getDistance(entity) >= explodeRange.getObject() || doInteractBoolean(entity)) continue;
-            RendererUtils.drawBlockESP(new BlockPos(entity.posX, entity.posY, entity.posZ), 255, 0, 0);
+            RendererUtils.drawBlockESP(new BlockPos(entity.posX, entity.posY, entity.posZ), new Color(255, 0, 0, 0));
         }
 
         for (Entity p : mc.world.getLoadedEntityList()) {
@@ -145,7 +149,7 @@ public class CrystalAura extends Module {
 
             if (bestPos == null) return;
 
-            RendererUtils.drawBlockESP(bestPos, 0, 255, 0);
+            RendererUtils.drawBlockESP(bestPos, new Color(0, 255, 0));
 
             poses.clear();
         }
