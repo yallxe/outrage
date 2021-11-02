@@ -131,8 +131,6 @@ public class KillAura extends Module {
         if (target == null) return;
 
 
-
-
         if (cooldownMode.getModes()[cooldownMode.getObject()].equals("APS")) {
             canHit = timer.hasTimeElapsed(1000 / apsValue.getObject(), true);
         } else {

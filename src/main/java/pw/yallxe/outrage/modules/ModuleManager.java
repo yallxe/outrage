@@ -56,6 +56,7 @@ public class ModuleManager {
         addModule(new OutlineESP());
         addModule(new LongJump());
         addModule(new Sneak());
+        addModule(new HypixelPP());
 
         addModule(new ClickGUIModule());
         addModule(new HUD());

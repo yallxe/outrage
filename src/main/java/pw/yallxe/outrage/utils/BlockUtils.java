@@ -5,8 +5,12 @@
 package pw.yallxe.outrage.utils;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockColored;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.NotNull;
@@ -73,6 +77,23 @@ public class BlockUtils {
             Blocks.GOLDEN_RAIL,
             Blocks.TORCH
     );
+
+    public static List<BlockPos> getPixelPartyBlockPoses(ItemStack compare_to, int x1, int x2, int y1, int y2, int z1, int z2) { // TODO: Optimize
+        List<BlockPos> poses = new ArrayList<>();
+        for (int x = x1; x < x2; x++) {
+            for (int y = y1; y < y2; y++) {
+                for (int z = z1; z < z2; z++) {
+                    BlockPos pos = new BlockPos(x, y, z);
+                    IBlockState block_state = mc.world.getBlockState(pos);
+                    if (block_state.getBlock() == Block.getBlockFromItem(compare_to.getItem()) &&
+                            EnumDyeColor.byMetadata(compare_to.getMetadata()) == block_state.getValue(BlockColored.COLOR)) {
+                        poses.add(pos);
+                    }
+                }
+            }
+        }
+        return poses;
+    }
 
     public static boolean isBlockUnSolid(@NotNull Block block) {
         return unSolidBlocks.contains(block);
