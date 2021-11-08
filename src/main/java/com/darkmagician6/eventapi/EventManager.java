@@ -79,11 +79,7 @@ public final class EventManager {
      */
     public static void unregister(Object object) {
         for (final List<MethodData> dataList : REGISTRY_MAP.values()) {
-            for (final MethodData data : dataList) {
-                if (data.getSource().equals(object)) {
-                    dataList.remove(data);
-                }
-            }
+            dataList.removeIf(data -> data.getSource().equals(object));
         }
 
         cleanMap(true);
@@ -97,11 +93,7 @@ public final class EventManager {
      */
     public static void unregister(Object object, Class<? extends Event> eventClass) {
         if (REGISTRY_MAP.containsKey(eventClass)) {
-            for (final MethodData data : REGISTRY_MAP.get(eventClass)) {
-                if (data.getSource().equals(object)) {
-                    REGISTRY_MAP.get(eventClass).remove(data);
-                }
-            }
+            REGISTRY_MAP.get(eventClass).removeIf(data -> data.getSource().equals(object));
 
             cleanMap(true);
         }
@@ -235,7 +227,7 @@ public final class EventManager {
      * @return Event in the state after dispatching it.
      */
     @NotNull
-    public static final Event call(final Event event) {
+    public static Event call(final Event event) {
         List<MethodData> dataList = REGISTRY_MAP.get(event.getClass());
 
         if (dataList != null) {
@@ -270,9 +262,7 @@ public final class EventManager {
     private static void invoke(MethodData data, Event argument) {
         try {
             data.getTarget().invoke(data.getSource(), argument);
-        } catch (IllegalAccessException e) {
-        } catch (IllegalArgumentException e) {
-        } catch (InvocationTargetException e) {
+        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ignored) {
         }
     }
 

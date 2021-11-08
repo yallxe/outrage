@@ -18,7 +18,8 @@ import pw.yallxe.outrage.gui.clickgui.layout.Layout;
 import java.util.*;
 
 public class Pane extends AbstractComponent {
-    protected @NotNull List<AbstractComponent> components = new ArrayList<>();
+    protected @NotNull
+    final List<AbstractComponent> components = new ArrayList<>();
     protected @NotNull Map<AbstractComponent, int[]> componentLocations = new HashMap<>();
     protected @Nullable Layout layout;
     private final @NotNull ILayoutManager layoutManager;

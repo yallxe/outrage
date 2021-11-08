@@ -52,10 +52,6 @@ public class GlyphPageFontRenderer {
      * Used to speify new alpha value for the current color.
      */
     private float alpha;
-    /**
-     * Text color of the currently rendering string.
-     */
-    private int textColor;
 
     /**
      * Set if the "k" style (random) is active in currently rendering string
@@ -240,7 +236,9 @@ public class GlyphPageFontRenderer {
                     }
 
                     int j1 = this.colorCode[i1];
-                    this.textColor = j1;
+                    /**
+                     * Text color of the currently rendering string.
+                     */
 
                     GlStateManager.color((float) (j1 >> 16) / 255.0F, (float) (j1 >> 8 & 255) / 255.0F, (float) (j1 & 255) / 255.0F, this.alpha);
                 } else if (i1 == 16) {

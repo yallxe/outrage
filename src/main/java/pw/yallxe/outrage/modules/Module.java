@@ -22,6 +22,7 @@ public abstract class Module {
     private final boolean hidden;
     private int keybind;
     private boolean state;
+    private String hud_status = null;
 
     protected Module(@NotNull String name, @NotNull String description, @NotNull ModuleCategory moduleCategory) {
         this(name, description, moduleCategory, true, false, Keyboard.KEY_NONE);
@@ -34,6 +35,14 @@ public abstract class Module {
         this.canBeEnabled = canBeEnabled;
         this.hidden = hidden;
         this.keybind = keybind;
+    }
+
+    public void setHudStatus(String value) {
+        hud_status = value;
+    }
+
+    public String getHudStatus() {
+        return hud_status;
     }
 
     public @NotNull String getName() {

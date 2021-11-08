@@ -13,7 +13,7 @@ package pw.yallxe.outrage.events;
 import com.darkmagician6.eventapi.events.Event;
 
 public class Render3DEvent implements Event {
-    public float ticks;
+    public final float ticks;
     public Render3DEvent(float ticks) {
         this.ticks = ticks;
     }

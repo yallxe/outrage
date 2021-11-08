@@ -7,9 +7,6 @@ import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
-import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL41.glClearDepthf;
-
 public class ClientBaseRendererImpl implements IRenderer {
     private final @NotNull GlyphPageFontRenderer renderer;
 

@@ -5,6 +5,7 @@ package pw.yallxe.outrage.utils;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Arrays;
 import java.util.Map;
 
 import net.minecraft.client.Minecraft;
@@ -46,7 +47,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class ReflectionFields {
     
-    public static @NotNull Minecraft mc = Minecraft.getMinecraft();
+    public static @NotNull
+    final Minecraft mc = Minecraft.getMinecraft();
     
     public static @Nullable Field renderPosX;
     public static @Nullable Field renderPosY;
@@ -215,7 +217,7 @@ public class ReflectionFields {
             }
         }
 
-        throw new IllegalStateException("Field with names: " + names + " not found!");
+        throw new IllegalStateException("Field with names: " + Arrays.toString(names) + " not found!");
     }
 
     public static Method getMethod(@NotNull Class c, String @NotNull [] names, Class<?>... args) {
@@ -229,7 +231,7 @@ public class ReflectionFields {
             }
         }
 
-        throw new IllegalStateException("Method with names: " + names + " not found!");
+        throw new IllegalStateException("Method with names: " + Arrays.toString(names) + " not found!");
     }
 
     public static double getRenderPosX() {

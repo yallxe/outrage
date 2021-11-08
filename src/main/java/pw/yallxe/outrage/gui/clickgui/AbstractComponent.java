@@ -13,7 +13,8 @@ import org.jetbrains.annotations.NotNull;
 public abstract class AbstractComponent {
     protected int x;
     protected int y;
-    protected @NotNull IRenderer renderer;
+    protected @NotNull
+    final IRenderer renderer;
     private int width;
     private int height;
     private boolean sizeChanged;

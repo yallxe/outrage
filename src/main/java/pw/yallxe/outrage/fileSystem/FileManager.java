@@ -190,7 +190,7 @@ public class FileManager {
                         try {
                             value.fromJsonObject(valueObject);
                         } catch (Exception e) {
-                            backupReasons.add("Error while applying 'values/" + stringJsonElementEntry.getKey() + "' " + e.toString());
+                            backupReasons.add("Error while applying 'values/" + stringJsonElementEntry.getKey() + "' " + e);
                         }
                     }
                 }

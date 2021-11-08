@@ -84,7 +84,8 @@ public class RotationUtils {
 
 
 class Rotation {
-    float rotationYaw, rotationPitch;
+    final float rotationYaw;
+    final float rotationPitch;
 
     public Rotation(float rotationYaw, float rotationPitch) {
         this.rotationYaw = rotationYaw;

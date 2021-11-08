@@ -15,8 +15,7 @@ import pw.yallxe.outrage.modules.Module;
 import pw.yallxe.outrage.modules.ModuleCategory;
 import pw.yallxe.outrage.utils.CrystalUtils;
 import pw.yallxe.outrage.utils.RendererUtils;
-import pw.yallxe.outrage.utils.fontRenderer.GlyphPage;
-import pw.yallxe.outrage.utils.fontRenderer.GlyphPageFontRenderer;
+import pw.yallxe.outrage.utils.UIUtils;
 import pw.yallxe.outrage.valuesystem.NumberValue;
 
 import java.awt.*;
@@ -29,23 +28,10 @@ public class HoleESP extends Module {
     private final @NotNull NumberValue<Integer> gVal = new NumberValue<>("G", 0, 0, 255);
     private final @NotNull NumberValue<Integer> bVal = new NumberValue<>("B", 0, 0, 255);
 
-    private final @NotNull GlyphPageFontRenderer renderer;
+    private final @NotNull UIUtils ui = new UIUtils("BebasNeueRegular", 17);
 
     public HoleESP() {
         super("HoleESP", "Shows safe spots.", ModuleCategory.RENDER);
-
-        char[] chars = new char[256];
-
-        for (int i = 0; i < chars.length; i++) {
-            chars[i] = (char) i;
-        }
-
-        GlyphPage glyphPage = new GlyphPage(new Font("BebasNeueRegular", Font.PLAIN, 17), true, true);
-
-        glyphPage.generateGlyphPage(chars);
-        glyphPage.setupTexture();
-
-        renderer = new GlyphPageFontRenderer(glyphPage, glyphPage, glyphPage, glyphPage);
     }
 
     @EventTarget
@@ -58,12 +44,12 @@ public class HoleESP extends Module {
         for(BlockPos pos : CrystalUtils.getSortedHoles()) {
             if(pos.equals(new BlockPos(mc.player.posX, mc.player.posY, mc.player.posZ))) {
                 ScaledResolution sr = new ScaledResolution(mc);
-                renderer.drawString("HoleESP: Safe", (float)(sr.getScaledWidth() - renderer.getStringWidth("HoleESP: Safe")) - 4, (float)(sr.getScaledHeight()) - renderer.getFontHeight() - 4, new Color(0, 255, 0).getRGB(), false);
+                ui.drawText("HoleESP: Safe", sr.getScaledWidth() - ui.getStringWidth("HoleESP: Safe") - 4, sr.getScaledHeight() - ui.getFontHeight() - 4, new Color(0, 255, 0).getRGB(), false);
                 return;
             }
         }
         ScaledResolution sr = new ScaledResolution(mc);
-        renderer.drawString("HoleESP: UnSafe", (float)(sr.getScaledWidth() - renderer.getStringWidth("HoleESP: UnSafe")) - 4, (float)(sr.getScaledHeight()) - renderer.getFontHeight() - 4, new Color(255, 0, 0).getRGB(), false);
+        ui.drawText("HoleESP: UnSafe", sr.getScaledWidth() - ui.getStringWidth("HoleESP: UnSafe") - 4, sr.getScaledHeight() - ui.getFontHeight() - 4, new Color(255, 0, 0).getRGB(), false);
     }
 
     @EventTarget
@@ -71,13 +57,9 @@ public class HoleESP extends Module {
         int drawnHoles = 0;
         for(BlockPos pos : CrystalUtils.getSortedHoles()) {
 
-            if(drawnHoles >= holesval.getObject()) {
-                break;
-            }
+            if (drawnHoles >= holesval.getObject()) break;
 
-            if(pos.equals(new BlockPos(mc.player.posX, mc.player.posY, mc.player.posZ))) {
-                continue;
-            }
+            if (pos.equals(new BlockPos(mc.player.posX, mc.player.posY, mc.player.posZ))) continue;
 
             if(CrystalUtils.isSafe(pos)) {
                 RendererUtils.drawBlockESP(pos, new Color(rVal.getObject(), gVal.getObject(), bVal.getObject(), 30));

@@ -20,7 +20,7 @@ import java.awt.*;
 
 public class Spoiler extends AbstractComponent {
     private static final int PREFERRED_HEIGHT = 28;
-    public int preferredWidth;
+    public final int preferredWidth;
     private @Nullable String title;
     private final int preferredHeight;
     private boolean hovered;

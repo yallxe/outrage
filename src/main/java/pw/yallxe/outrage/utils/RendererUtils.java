@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.opengl.GL11;
 
@@ -319,4 +320,33 @@ public class RendererUtils {
         endESPRender();
     }
 
+    public static void drawTracer(Vec3d vec3d, Color color, float ticks) {
+        double renderPosX = mc.getRenderManager().viewerPosX;
+        double renderPosY = mc.getRenderManager().viewerPosY;
+        double renderPosZ = mc.getRenderManager().viewerPosZ;
+        double xPos = (vec3d.x + (0.0) * ticks) - renderPosX;
+        double yPos = (vec3d.y + (0.0) * ticks) + 1 / 2.0f - renderPosY;
+        double zPos = (vec3d.z + (0.0) * ticks) - renderPosZ;
+
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glEnable(GL11.GL_LINE_SMOOTH);
+        GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glLineWidth(1.0f);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        GL11.glDepthMask(false);
+        GL11.glColor4f(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
+
+        Vec3d eyes = new Vec3d(0, 0, 1).rotatePitch(-(float) Math.toRadians(mc.player.rotationPitch)).rotateYaw(-(float) Math.toRadians(mc.player.rotationYaw));
+
+        GL11.glBegin(GL11.GL_LINES);
+        GL11.glVertex3d(eyes.x, mc.player.getEyeHeight() + eyes.y, eyes.z);
+        GL11.glVertex3d(xPos, yPos, zPos);
+        GL11.glEnd();
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GL11.glEnable(GL11.GL_LIGHTING);
+        GL11.glDepthMask(true);
+    }
 }

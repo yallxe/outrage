@@ -56,6 +56,10 @@ public class ModeValue extends Value<Integer> {
         return super.setObject(object);
     }
 
+    public String getMode() {
+        return this.getModes()[this.getObject()];
+    }
+
     @Override
     public void addToJsonObject(@NotNull JsonObject obj) {
         obj.addProperty(getName(), getObject());

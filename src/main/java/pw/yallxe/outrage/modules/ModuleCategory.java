@@ -13,7 +13,8 @@ import org.jetbrains.annotations.NotNull;
 public enum ModuleCategory {
     RENDER("Render"), MOVEMENT("Movement"), COMBAT("Combat"), MISC("Misc"), PLAYER("Player"), WORLD("World"), FUN("Fun");
 
-    private @NotNull String name;
+    private @NotNull
+    final String name;
 
     ModuleCategory(@NotNull String name) {
         this.name = name;

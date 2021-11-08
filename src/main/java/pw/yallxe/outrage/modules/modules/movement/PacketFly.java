@@ -21,7 +21,8 @@ import pw.yallxe.outrage.valuesystem.ModeValue;
 import java.util.Objects;
 
 public class PacketFly extends Module {
-    private @NotNull ModeValue mode = new ModeValue("Mode", "New", "New", "Old");
+    private @NotNull
+    final ModeValue mode = new ModeValue("Mode", "New", "New", "Old");
 
     private final @NotNull Timer timer = new Timer();
 

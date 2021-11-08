@@ -20,7 +20,6 @@ public class ComboBox extends AbstractComponent {
     private static final int PREFERRED_WIDTH = 180;
     private static final int PREFERRED_HEIGHT = 22;
 
-    private final int preferredWidth;
     private final int preferredHeight;
     private boolean hovered;
     private boolean hoveredExtended;
@@ -29,13 +28,11 @@ public class ComboBox extends AbstractComponent {
     private int selectedIndex;
 
     private boolean opened;
-    private int mouseX;
     private int mouseY;
 
     public ComboBox(@NotNull IRenderer renderer, int preferredWidth, int preferredHeight, String @NotNull [] values, int selectedIndex) {
         super(renderer);
 
-        this.preferredWidth = preferredWidth;
         this.preferredHeight = preferredHeight;
 
         this.values = values;
@@ -119,7 +116,6 @@ public class ComboBox extends AbstractComponent {
         hovered = !offscreen && x >= this.x && y >= this.y && x <= this.x + getWidth() && y <= this.y + preferredHeight;
         hoveredExtended = !offscreen && x >= this.x && y >= this.y && x <= this.x + getWidth() && y <= this.y + getHeight();
 
-        mouseX = x;
         mouseY = y;
     }
 

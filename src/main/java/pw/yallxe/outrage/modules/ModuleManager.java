@@ -64,9 +64,6 @@ public class ModuleManager {
 
     private void addModule(@NotNull Module module) {
         modules.add(module);
-        if (module instanceof HUD) {
-            MinecraftForge.EVENT_BUS.register(module);
-        }
         ClientBase.INSTANCE.valueManager.registerObject(module.getName(), module);
     }
 

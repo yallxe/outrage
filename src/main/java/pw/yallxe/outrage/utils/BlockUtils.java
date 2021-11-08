@@ -22,7 +22,8 @@ import java.util.List;
 public class BlockUtils {
     private static final @NotNull Minecraft mc = Minecraft.getMinecraft();
 
-    public static @NotNull List<Block> unSolidBlocks = Arrays.asList(
+    public static @NotNull
+    final List<Block> unSolidBlocks = Arrays.asList(
             Blocks.FLOWING_LAVA,
             Blocks.FLOWER_POT,
             Blocks.SNOW,
