@@ -1,5 +1,5 @@
 # Outrage
-best skid client<br>
+Maybe one day I'll unarchive it.<br>
 <img src="https://github.com/yallxe/outrage/blob/master/src/main/resources/preview.png?raw=true" alt="Outrage"></img>
 ## Build / Contribute
 - Download intellij idea
